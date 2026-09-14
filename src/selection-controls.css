@@ -1,0 +1,83 @@
+.selection-switch, .selection-group {
+  font-family: inherit; font-size: var(--font-size-compact, 14px);
+  font-weight: 400; line-height: var(--line-height-compact, 20px);
+  color: var(--ink, #000);
+}
+.selection-switch { display: flex; align-items: center; position: relative; gap: 8px; min-height: var(--control-height, 44px); cursor: pointer; }
+.selection-switch > input, .selection-group .selection-option > input {
+  position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; margin: 0;
+  opacity: 0; z-index: 1; cursor: inherit;
+}
+.selection-switch-track {
+  display: block; position: relative; flex: 0 0 28px; width: 28px; height: 16px; box-sizing: border-box;
+  border: 0; border-radius: 16px;
+  background-color: var(--selection-surface, #a0a0a0); transition: background-color var(--motion-control, 180ms) var(--ease-ui, ease);
+}
+.selection-switch-track > span {
+  position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%;
+  background-color: var(--surface-base, #fff); transition: transform var(--motion-control, 180ms) var(--ease-ui, ease);
+}
+.selection-switch > input:checked + .selection-switch-track { background-color: var(--ink, #000); }
+.selection-switch > input:checked + .selection-switch-track > span { transform: translateX(12px); }
+.selection-switch > input:focus-visible + .selection-switch-track {
+  outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px;
+}
+.selection-switch:has(:disabled) { color: var(--field-disabled-ink, #8a8a8a); cursor: not-allowed; }
+.selection-switch > input:disabled + .selection-switch-track { background-color: var(--field-disabled-surface, #f2f2f2); }
+.selection-switch > input:disabled + .selection-switch-track > span { background-color: var(--field-disabled-ink, #8a8a8a); }
+.selection-group.selection-group { border: 0; padding: 0; margin: 0; min-width: 0; }
+.selection-group > legend { padding: 0; margin-bottom: 8px; font: inherit; }
+.selection-options { display: grid; }
+.selection-option { display: flex; position: relative; align-items: center; gap: 8px; min-width: 0; min-height: var(--control-height, 44px); cursor: pointer; }
+.selection-option > span { overflow-wrap: anywhere; }
+.selection-radio-mark { display: flex; align-items: center; justify-content: center; flex: 0 0 16px; width: 16px; height: 16px; border: 0; border-radius: 50%; background-color: var(--selection-surface, #a0a0a0); color: var(--surface-base, #fff); transition: background-color var(--motion-control, 180ms) var(--ease-ui, ease); }
+.selection-radio-mark > svg { opacity: 0; }
+.selection-option > input:checked + .selection-radio-mark { background-color: var(--ink, #000); }
+.selection-option > input:checked + .selection-radio-mark > svg { opacity: 1; }
+.selection-option > input:focus-visible + .selection-radio-mark { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.selection-option > input:disabled + .selection-radio-mark { background-color: var(--field-disabled-surface, #f2f2f2); }
+.selection-option > input:disabled:checked + .selection-radio-mark { background-color: var(--field-disabled-ink, #8a8a8a); }
+.selection-option:has(:disabled) { color: var(--field-disabled-ink, #8a8a8a); cursor: not-allowed; }
+.selection-group[data-variant="segmented"] { width: fit-content; max-width: 100%; }
+.selection-group[data-variant="segmented"] .selection-options { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; padding: 2px; border-radius: var(--radius-surface, 2px); background-color: var(--control-rest, #ededed); }
+.selection-group[data-variant="segmented"] .selection-option {
+  justify-content: center; box-sizing: border-box; padding: calc((var(--control-height-compact, 32px) - var(--line-height-compact, 20px)) / 2) 8px; min-height: var(--control-height-compact, 32px);
+  border: 0; border-radius: var(--radius-surface, 2px); color: var(--ink-muted, #666); text-align: center;
+  transition: background-color var(--motion-control, 180ms) var(--ease-ui, ease), color var(--motion-control, 180ms) var(--ease-ui, ease);
+}
+.selection-group[data-variant="segmented"] .selection-option:has(:checked) { color: var(--ink, #000); background-color: var(--surface-base, #fff); }
+.selection-group[data-variant="segmented"] .selection-option:has(:focus-visible) { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.selection-group[data-variant="segmented"] .selection-option:has(:disabled) { color: var(--field-disabled-ink, #8a8a8a); cursor: not-allowed; }
+@media (hover: hover) {
+  .selection-switch:has(input:enabled:not(:checked)):hover .selection-switch-track { background-color: var(--selection-surface-hover, #8c8c8c); }
+  .selection-switch:has(input:enabled:checked):hover .selection-switch-track { background-color: var(--control-pressed, #333); }
+  .selection-option:has(input:enabled:not(:checked)):hover .selection-radio-mark { background-color: var(--selection-surface-hover, #8c8c8c); }
+  .selection-group[data-variant="segmented"] .selection-option:has(input:enabled:not(:checked)):hover { color: var(--ink, #000); background-color: var(--surface-paper, #fafafa); }
+}
+@media (pointer: coarse), (max-width: 639px) {
+  .selection-group[data-variant="segmented"] .selection-options { padding:2px; }
+  .selection-group[data-variant="segmented"] .selection-option {
+    min-height:calc(var(--control-height,44px) - 4px);
+  }
+  .selection-group[data-variant="segmented"] .selection-option > input { top:-2px; height:calc(100% + 4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selection-switch-track, .selection-switch-track > span, .selection-radio-mark, .selection-group[data-variant="segmented"] .selection-option { transition: none; }
+}
+
+.selection-toolbar { --toolbar-segment-height: var(--control-height-compact, 32px); --toolbar-row: var(--control-height, 44px); display: flex; flex-wrap: wrap; align-items: flex-end; gap: 24px; }
+.selection-toolbar:has(> .selection-group[data-variant="segmented"]) { --toolbar-row: max(var(--control-height, 44px), calc(var(--toolbar-segment-height) + 4px)); }
+.selection-toolbar .selection-group[data-variant="segmented"] .selection-options { margin-block: calc((var(--toolbar-row) - var(--toolbar-segment-height) - 4px) / 2); }
+.selection-toolbar > .selection-switch { min-height: var(--toolbar-row); }
+@media (pointer: coarse), (max-width: 639px) { .selection-toolbar { --toolbar-segment-height: var(--control-height, 44px); } }
+
+/* Bare actions share the visible control row, below any group legend. */
+.selection-toolbar { --toolbar-button-height:var(--button-height,32px); }
+.selection-toolbar > .form-button { margin-block:calc((var(--toolbar-row) - var(--toolbar-button-height)) / 2); }
+@media (pointer: coarse), (max-width: 639px) { .selection-toolbar { --toolbar-button-height:var(--control-height,44px); } }
+
+/* The mobile segmented target already includes its vertical breathing room. */
+@media (pointer:coarse), (max-width:639px) {
+  .selection-toolbar:has(> .selection-group[data-variant="segmented"]) { --toolbar-row:var(--control-height,44px); }
+  .selection-toolbar .selection-group[data-variant="segmented"] .selection-options { margin-block:0; }
+}

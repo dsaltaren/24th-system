@@ -1,0 +1,24 @@
+.essay-prompt {
+  --control-rest: #fff;
+  --control-hover: #fff;
+  --font-size-compact: var(--font-size-body, 18px);
+  --line-height-compact: var(--line-height-body, 28px);
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--space-panel-mobile, 16px);
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / .13);
+  border-radius: var(--radius-surface, 2px);
+}
+.essay-prompt .form-input {
+  background: #fff;
+  border: 0;
+  border-radius: 0;
+  padding: var(--space-panel-mobile, 16px);
+  width: 100%;
+  min-height: 84px;
+  resize: vertical;
+}
+.essay-prompt textarea::placeholder { color: var(--ink-muted, #666); opacity: 1; }
+.essay-prompt:focus-within { outline: 2px solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.essay-prompt .form-input:focus-visible { outline: none; }

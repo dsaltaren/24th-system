@@ -1,0 +1,8 @@
+.overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: calc(var(--space-unit, 4px) * 6); margin-block: var(--reading-line, 28px); }
+.overview-card.overview-card { border-radius: var(--radius-surface, 2px); display: flex; flex-direction: column; min-width: 0; padding: calc(var(--space-unit, 4px) * 4); border: 1px solid rgb(0 0 0 / var(--rule-opacity, .07)); color: var(--ink-muted, #666); background: var(--surface-base, #fff); text-decoration: none; transition: color var(--motion-control, 180ms) var(--ease-ui, ease), border-color var(--motion-control, 180ms) var(--ease-ui, ease); }
+.overview-card-preview { display: flex; align-items: center; justify-content: center; min-height: 112px; margin-bottom: 16px; color: var(--ink, #000); pointer-events: none; user-select: none; }
+.overview-card-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: var(--font-size-secondary, 16px); line-height: var(--line-height-secondary, 24px); }
+.overview-card-description { margin-top: 4px; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); color: var(--ink-muted, #666); }
+.overview-card.overview-card:focus-visible { color: var(--ink, #000); outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+@media (hover: hover) { .overview-card:hover { color: var(--ink, #000); } }
+@media (prefers-reduced-motion: reduce) { .overview-card.overview-card { transition: none; } }

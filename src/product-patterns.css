@@ -1,0 +1,7 @@
+.product-pattern { display: grid; gap: 16px; min-width: 0; max-width: 100%; font-size: var(--font-size-secondary, 16px); line-height: var(--line-height-secondary, 24px); }
+.product-pattern-form { width: 100%; max-width: var(--form-width, 420px); }
+.product-pattern-toolbar { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.product-pattern-toolbar > .form-field { flex: 1 1 140px; min-width: 0; }
+.product-pattern-count.product-pattern-count { margin: 0; font-size: var(--font-size-caption, 12px); line-height: var(--line-height-caption, 20px); color: var(--ink-muted, #666); }
+.product-pattern-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: 8px; }
+.product-pattern-form > .form-button { justify-self: start; }

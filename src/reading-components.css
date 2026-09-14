@@ -1,0 +1,110 @@
+/* Full galleries retain their column width inside flex chapters and centered views. */
+.media-group.full { width: 100%; }
+/* Shared by the portfolio and its live design-system specimen. */
+/* Reading roles change type only; chrome and media retain their own geometry. */
+.reading-copy { font-size: var(--font-size-secondary, 16px); line-height: var(--line-height-secondary, 24px); }
+.reading-heading.reading-heading { font-size: var(--font-size-body, 18px); line-height: var(--line-height-body, 28px); font-weight: 400; }
+.rhythm-media { container-type: inline-size; }
+.rhythm-media-slot { height: round(up, calc(100cqw * var(--media-ratio)), var(--media-step, var(--rhythm-unit, 4px))); }
+.rhythm-media img,.rhythm-media video { display: block; width: 100%; height: auto; }
+.media-group figcaption {
+  --caption-ink-offset: 0px;
+  margin-top: 8px; font-size: var(--reading-size, 18px); line-height: var(--line-height-caption, 20px);
+}
+/* The strut stays on the reading baseline; only the smaller glyphs move. */
+.caption-copy { position: relative; top: var(--caption-ink-offset); font-size: var(--font-size-caption, 12px); line-height: 0; }
+@media (min-width: 1024px) {
+  :is(.portfolio,.rhythm-specimen) .media-group figcaption {
+    --caption-ink-offset: var(--caption-optical-offset, 4px);
+    margin-top: calc(-1 * var(--caption-lift, 0px)); line-height: var(--reading-line, 28px);
+  }
+}
+
+/* Image-adjacent captions use the same role without reserving a reading baseline. */
+.media-group figcaption:is([data-caption-spacing="image"], [data-caption-spacing="flow"]) {
+  --caption-ink-offset: 0px;
+  margin-top: calc(8px - var(--caption-lift, 0px));
+  padding-bottom: var(--caption-reserve, 0px);
+  font-size: var(--font-size-caption, 12px); line-height: var(--line-height-caption, 20px);
+}
+.media-group figcaption:is([data-caption-spacing="image"], [data-caption-spacing="flow"]) .caption-copy { top: 0; line-height: inherit; }
+/* The gallery owns its image hit region even inside a documentation button scope. */
+.reading-system .carousel.carousel { padding: 0; color: inherit; }
+
+/* Article hierarchy shares the reading body and adds only two heading sizes. */
+.reading-article { font-size: var(--font-size-body, 18px); line-height: var(--line-height-body, 28px); }
+.reading-article :is(h1,h2,h3,h4,h5,h6) { font-weight: 400; font-size: inherit; line-height: inherit; }
+.reading-article :is(h1,[data-reading-role="title"]) { font-size: var(--font-size-title,24px); line-height: var(--line-height-title,32px); }
+.reading-article :is(h2,[data-reading-role="heading"]) { font-size: var(--font-size-heading,20px); line-height: var(--line-height-body,28px); }
+.reading-article[data-reading-mode="interface"] { font-size: var(--font-size-secondary,16px); line-height: var(--line-height-secondary,24px); }
+.reading-article[data-reading-mode="interface"] :is(h1,h2,h3,h4,h5,h6,[data-reading-role]) { font-size: var(--font-size-body,18px); line-height: var(--line-height-body,28px); }
+
+/* Section glyphs share the heading role while their parent owns the line box. */
+.reading-section-title { font-size: var(--font-size-body, 18px); line-height: 0; font-weight: 400; }
+
+/* Project loops stay readable at a modest width with a square custom control. */
+.media-group[data-loop-video][data-video-size="compact"], .portfolio.full-view .media-group[data-loop-video][data-video-size="compact"] { max-width:720px; }
+.gallery-loop { position:relative; width:100%; }
+.gallery-loop-toggle.gallery-loop-toggle { position:absolute; right:8px; bottom:8px; display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; border-radius:0; color:var(--media-control-ink, #fff); background:var(--media-control-surface, rgb(0 0 0 / .48)); -webkit-backdrop-filter:blur(var(--media-control-blur, 32px)); backdrop-filter:blur(var(--media-control-blur, 32px)); cursor:pointer; }
+.gallery-loop-toggle.gallery-loop-toggle:hover { background:var(--media-control-hover, rgb(0 0 0 / .64)); }
+.gallery-loop-toggle:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+@media (pointer:coarse), (max-width:639px) { .gallery-loop-toggle.gallery-loop-toggle { width:44px; height:44px; } }
+
+.gallery-loop-toggle.gallery-loop-toggle svg { color:var(--media-control-ink, #fff); stroke:currentColor; stroke-width:1px; }
+
+/* Video playback is controlled directly on the image, without a visible icon. */
+.gallery-loop:not([data-compact-control]) .gallery-loop-toggle.gallery-loop-toggle, .gallery-loop:not([data-compact-control]) .gallery-loop-toggle.gallery-loop-toggle:hover { inset:0; width:100%; height:100%; background:transparent; backdrop-filter:none; -webkit-backdrop-filter:none; }
+
+.gallery-loop-carousel { position:relative; }
+.gallery-loop-next.gallery-loop-next { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; border-radius:0; background:transparent; cursor:e-resize; }
+.gallery-loop-next:focus-visible { outline:2px solid var(--ink, #111); outline-offset:-2px; box-shadow:inset 0 0 0 4px white; }
+.gallery-loop[data-compact-control] .gallery-loop-toggle { z-index:1; opacity:0; pointer-events:none; }
+.gallery-loop[data-compact-control] .gallery-loop-toggle:focus-visible { opacity:1; pointer-events:auto; }
+
+/* Revenue chart: zero baseline, explicit values, and outline-only targets. */
+.revenue-chart { box-sizing:border-box; margin:var(--space-module) 0; width:100%; padding:var(--space-panel); background:var(--surface-base); border:1px solid rgb(0 0 0 / var(--rule-opacity, .1)); border-radius:var(--radius-surface, 2px); }
+.revenue-chart-title { color:var(--ink-muted); font-size:var(--font-size-compact); line-height:var(--line-height-compact); margin-bottom:var(--space-module); }
+.revenue-chart-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-panel); }
+.revenue-chart-track { height:200px; padding-top:32px; display:flex; align-items:flex-end; border-bottom:1px solid var(--ink-muted); }
+.revenue-chart-bar { position:relative; height:var(--bar-height); width:100%; max-width:160px; background:var(--ink); }
+.revenue-chart-column:first-child .revenue-chart-bar { background:var(--ink-muted); }
+.revenue-chart-bar[data-target] { background:transparent; border:1px dashed var(--ink); border-bottom:0; }
+.revenue-chart-value { position:absolute; left:0; bottom:calc(100% + 8px); white-space:nowrap; font-size:24px; line-height:28px; color:var(--ink); }
+.revenue-chart .revenue-chart-label { margin:8px 0 0; font-size:16px; line-height:24px; }
+.revenue-chart-label span { display:block; font-size:12px; line-height:20px; color:var(--ink-muted); }
+@media(max-width:639px) { .revenue-chart { padding:var(--space-panel-mobile); } .revenue-chart-track { height:168px; } }
+
+@keyframes revenue-bar-grow { from { height:0; } to { height:var(--bar-height); } }
+@media (prefers-reduced-motion:no-preference) {
+  .revenue-chart[data-motion="pending"] .revenue-chart-bar { height:0; }
+  .revenue-chart[data-motion="entered"] .revenue-chart-bar { animation:revenue-bar-grow var(--motion-diamond, 480ms) var(--ease-reading) both; }
+}
+
+/* Portrait photographs keep a readable scale; related portraits can share a row. */
+.media-group[data-portrait] { max-width:360px; }
+.media-strip-group { max-width:1080px; }
+.media-strip { display:flex; align-items:flex-start; gap:0; min-width:0; }
+.media-strip-item { min-width:0; }
+.media-strip-item > img { display:block; width:100%; height:auto; margin:0; padding:0; border:0; border-radius:0; }
+@media(max-width:639px) {
+  .media-strip { overflow-x:auto; scroll-snap-type:x proximity; }
+  .media-strip-item { min-width:0; }
+.media-strip-item > img { scroll-snap-align:start; }
+}
+
+.gallery-image-stage { display: block; position: relative; overflow: hidden; }
+.gallery-image-stage > .gallery-image-incoming { position: relative; z-index: 1; animation: gallery-image-crossfade 440ms cubic-bezier(.33,0,.2,1) both; }
+.gallery-image-stage > .gallery-image-pending { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.gallery-image-stage > .gallery-image-previous { animation: gallery-image-out 440ms cubic-bezier(.33,0,.2,1) both; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+@keyframes gallery-image-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gallery-image-crossfade { from { opacity: 0; } to { opacity: 1; } }
+@media(prefers-reduced-motion:reduce) { .gallery-image-stage > .gallery-image-incoming { animation: none; } .gallery-image-previous { display: none !important; } }
+
+/* Keep mobile captions and the reading position moving with the image frame. */
+@media (max-width: 1023px) {
+  .rhythm-carousel .rhythm-media-slot { transition: height 440ms cubic-bezier(.33,0,.2,1); overflow-anchor: none; }
+  .rhythm-carousel :is(.media-reveal, .media-reveal-content, .carousel, .gallery-image-stage) { height: 100%; }
+  .rhythm-carousel .gallery-image-stage > img { width: 100%; height: 100%; object-fit: contain; }
+  .rhythm-carousel .carousel { -webkit-tap-highlight-color: transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .rhythm-carousel .rhythm-media-slot { transition: none; } }

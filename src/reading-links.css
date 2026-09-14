@@ -1,0 +1,24 @@
+/* Shared link states: one solid underline fades in, color remains the primary signal. */
+.portfolio a:not(.return-icon):not(.window-address):not(.form-button), .mobile-layer a:not(.form-button), .reading-system a:not(.form-button), .reading-system .text-action, .view-toggle > span {
+  color: var(--link-rest, var(--ink-muted));
+  background-image: none;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--motion-link, 180ms) var(--ease-ui, ease), color var(--motion-link, 180ms) var(--ease-ui, ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .portfolio a:not(.return-icon):not(.window-address):not(.form-button), .mobile-layer a:not(.form-button), .reading-system a:not(.form-button), .reading-system .text-action, .view-toggle > span { text-decoration-color: transparent; }
+  .portfolio a:not(.return-icon):not(.window-address):not(.form-button):hover, .mobile-layer a:not(.form-button):hover, .reading-system a:not(.form-button):hover, .reading-system .text-action:hover, .view-toggle:hover > span { color: var(--link-active, #000); text-decoration-color: rgb(0 0 0 / var(--underline-rest, .22)); }
+}
+.portfolio a:not(.return-icon):not(.window-address):not(.form-button):focus-visible, .mobile-layer a:not(.form-button):focus-visible, .reading-system a:not(.form-button):focus-visible, .reading-system .text-action:focus-visible, .view-toggle:focus-visible > span { color: var(--link-active, #000); text-decoration-color: rgb(0 0 0 / var(--underline-focus, .45)); }
+@media (prefers-reduced-motion: reduce) {
+  .portfolio a:not(.return-icon):not(.window-address):not(.form-button), .mobile-layer a:not(.form-button), .reading-system a:not(.form-button), .reading-system .text-action, .view-toggle > span { transition: none; }
+}
+
+.reading-system a.external-link { --link-rest: var(--link-external); --link-active: var(--link-external-hover); }
+.reading-system a[aria-current] { color: var(--ink); }
+:where(.reading-system :is(a,button):focus-visible) { outline: none; }
+:where(.reading-system :is(input,summary):focus-visible) { outline: 2px solid var(--ink-muted); outline-offset: 4px; }

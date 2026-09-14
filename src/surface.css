@@ -1,0 +1,14 @@
+/* Shared frame and inset ownership, independent of the navigation host. */
+[data-surface] { min-width:0; min-height:0; background:var(--surface-background,var(--surface-paper)); }
+[data-surface-body] { min-width:0; padding:var(--surface-body-gap,var(--header-inset,14px)) var(--surface-space,var(--space-panel)) var(--surface-space,var(--space-panel)); }
+[data-surface-body]:has(> :is(.rhythm-media,.bio-portrait,.media-group):first-child) { padding-top:var(--surface-space,var(--space-panel)); }
+[data-surface] > .surface-header { flex:none; margin:0; }
+@media(min-width:1024px) {
+  /* Match the leading media directly so route changes do not rely on :has invalidation. */
+  [data-surface-body] > :is(.project-section,.narrative):first-child > .media-group:first-child { margin-top:calc(var(--surface-space,var(--space-panel)) - var(--surface-body-gap,var(--header-inset,14px))); }
+  [data-surface-layout="columns"] { display:grid; grid-template-columns:var(--column-width) var(--column-width) minmax(0,1fr); height:100dvh; overflow:hidden; }
+  [data-surface-layout="columns"] [data-surface] { overflow:auto; overscroll-behavior:contain; overflow-anchor:none; scrollbar-width:thin; }
+}
+@media(max-width:1023px) {
+  [data-surface-body] { padding:var(--surface-space,var(--space-panel-mobile)) var(--surface-space,var(--space-panel-mobile)); }
+}

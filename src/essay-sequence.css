@@ -1,0 +1,26 @@
+.essay-sequence { font-size: var(--font-size-body, 18px); line-height: var(--line-height-body, 28px); display: grid; gap: 16px; padding: 20px; min-width: 0; background: #fff; border: 1px solid rgb(0 0 0 / .07); border-radius: var(--radius-surface, 2px); }
+.essay-sequence-top, .essay-sequence-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.essay-sequence-top { font-size: 12px; line-height: 20px; color: var(--ink-muted); }
+.essay-sequence button { font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; min-height: 44px; }
+.essay-sequence-top button { color: var(--ink); padding: 0; }
+.essay-sequence-steps { display: flex; padding: 0; margin: 0; list-style: none; }
+.essay-sequence .essay-sequence-steps > li { flex: 1; position: relative; margin: 0; min-width: 0; }
+.essay-sequence-steps li:not(:last-child)::after { content: ''; position: absolute; height: 1px; background: var(--rule-color); top: 22px; left: calc(50% + 16px); width: calc(100% - 32px); }
+.essay-sequence-steps button { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 8px 0; font-size: 12px; line-height: 20px; color: var(--ink-muted); }
+.essay-sequence-steps button > span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgb(0 0 0 / .15); }
+.essay-sequence-steps small { font: inherit; }
+.essay-sequence-steps [aria-current="step"] { color: var(--ink); }
+.essay-sequence-steps [aria-current="step"] > span { background: var(--ink); color: white; border-color: var(--ink); }
+.essay-sequence-copy > p, .essay-sequence-copy > ul { margin: 0; }
+.essay-sequence-copy > ul { padding-left: 1em; }
+.essay-sequence-actions { border-top: 1px solid rgb(0 0 0 / .06); padding-top: 8px; font-size: 14px; line-height: 20px; }
+.essay-sequence button:disabled { opacity: .3; cursor: default; }
+.essay-sequence button:not(:disabled):hover { color: var(--ink); }
+.essay-sequence button:not(:disabled):hover:not(.essay-sequence-steps button),
+.essay-sequence-steps button:not(:disabled):hover > small { text-decoration: underline; text-underline-offset: 4px; }
+.essay-sequence button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.essay-sequence-copy { display: grid; }
+.essay-sequence-copy > p { grid-area: 1 / 1; visibility: hidden; }
+.essay-sequence-copy > p[data-current] { visibility: visible; }
+
+.essay-sequence-copy > ul > li + li { margin-top: 8px; }

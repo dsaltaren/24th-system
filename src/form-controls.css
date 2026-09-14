@@ -1,0 +1,99 @@
+.form-field, .form-example {
+  display: grid;
+  gap: calc(var(--space-unit, 4px) * 2);
+  font-family: inherit;
+  font-size: var(--font-size-compact, 14px);
+  font-weight: 400;
+  line-height: var(--line-height-compact, 20px);
+}
+.form-example { gap: calc(var(--space-unit, 4px) * 4); width: 100%; max-width: var(--form-width, 420px); }
+.form-field-label { display: block; color: var(--ink, #000); }
+.form-required, .form-field .form-field-hint { color: var(--ink-muted, #666); }
+.form-field .form-field-hint, .form-field .form-field-error, .form-message.form-message { margin: 0; font-size: var(--font-size-caption, 12px); line-height: var(--line-height-caption, 20px); }
+.form-field .form-field-error, .form-message[data-status="error"] { color: var(--field-error, #b3261e); }
+.form-message[data-status="success"] { color: var(--field-success, #276738); }
+.form-input.form-input, .form-button.form-button {
+  box-sizing: border-box;
+  min-height: var(--control-height, 44px);
+  border: 0;
+  border-radius: var(--radius-surface, 2px);
+  padding: calc(var(--space-unit, 4px) * 2) calc(var(--space-unit, 4px) * 3);
+  color: var(--ink, #000);
+  background-color: var(--control-rest, #ededed);
+  font-family: inherit;
+  font-size: var(--font-size-compact, 14px);
+  font-weight: 400;
+  line-height: var(--line-height-compact, 20px);
+  transition: background-color var(--motion-control, 180ms) var(--ease-ui, ease), color var(--motion-control, 180ms) var(--ease-ui, ease);
+}
+.form-input.form-input { width: 100%; min-width: 0; }
+.form-select { position: relative; display: block; }
+.form-select > select.form-input { appearance: none; padding-right: calc(var(--space-unit, 4px) * 10); }
+.form-select > svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--ink-muted, #666); }
+.form-input.form-textarea { min-height: 112px; resize: vertical; }
+.form-button.form-button { cursor: pointer; width: fit-content; max-width: 100%; justify-self: start; }
+.form-button.form-button[data-full-width] { width: 100%; justify-self: stretch; align-self: stretch; }
+.form-button.form-button[data-size="field"] { min-height: var(--control-height, 44px); padding-block: 12px; }
+.form-button[data-variant="primary"] { color: var(--surface-base, #fff); background-color: var(--ink, #000); }
+.form-checkbox-label { position: relative; display: flex; gap: calc(var(--space-unit, 4px) * 2); align-items: center; min-height: var(--control-height, 44px); cursor: pointer; }
+.form-checkbox.form-checkbox { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; z-index: 1; cursor: inherit; appearance: none; }
+.form-checkbox-mark { border-radius: var(--radius-surface, 2px); display: flex; align-items: center; justify-content: center; flex: 0 0 16px; width: 16px; height: 16px; background-color: var(--selection-surface, #a0a0a0); color: var(--surface-base, #fff); }
+.form-checkbox-mark svg { opacity: 0; }
+.form-checkbox:checked + .form-checkbox-mark { background-color: var(--ink, #000); }
+.form-checkbox:checked + .form-checkbox-mark svg { opacity: 1; }
+.form-checkbox:disabled + .form-checkbox-mark { background-color: var(--field-disabled-surface, #f2f2f2); color: var(--field-disabled-ink, #8a8a8a); }
+.form-checkbox:focus-visible + .form-checkbox-mark { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.form-checkbox[aria-invalid="true"] + .form-checkbox-mark { background-color: var(--field-error, #b3261e); }
+@media (hover: hover) { .form-checkbox:enabled:not(:checked):hover + .form-checkbox-mark { background-color: var(--selection-surface-hover, #8c8c8c); } }
+
+.form-input[aria-invalid="true"] { background-color: color-mix(in srgb, var(--field-error, #b3261e) 8%, var(--surface-base, #fff)); }
+.form-input.form-input:focus-visible, .form-button.form-button:focus-visible, .form-checkbox.form-checkbox:focus-visible { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.form-input:disabled, .form-button:disabled { color: var(--field-disabled-ink, #8a8a8a); background-color: var(--field-disabled-surface, #f2f2f2); cursor: not-allowed; opacity: 1; }
+.form-checkbox-label:has(:disabled) { color: var(--field-disabled-ink, #8a8a8a); cursor: not-allowed; }
+@media (hover: hover) {
+  .form-input:enabled:not([aria-invalid="true"]):hover { background-color: var(--control-hover, #e3e3e3); }
+  .form-button[data-variant="primary"]:enabled:hover { background-color: var(--ink-muted, #666); }
+  .form-button[data-variant="secondary"]:enabled:hover { background-color: var(--control-hover, #e3e3e3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-input.form-input, .form-button.form-button { transition: none; }
+}
+
+.form-button[data-variant="primary"]:enabled:active { background-color: var(--control-pressed, #333); }
+.form-button[data-variant="secondary"]:enabled:active { background-color: var(--control-hover, #e3e3e3); }
+.form-checkbox-mark { transition: background-color var(--motion-control, 180ms) var(--ease-ui, ease); }
+.form-checkbox-mark svg { transition: opacity var(--motion-control, 180ms) var(--ease-ui, ease); }
+@media (hover: hover) { .form-checkbox:enabled:checked:hover + .form-checkbox-mark { background-color: var(--control-pressed, #333); } }
+@media (prefers-reduced-motion: reduce) { .form-checkbox-mark,.form-checkbox-mark svg { transition: none; } }
+
+@media (min-width: 640px) and (pointer: fine) {
+  .form-input.form-input { min-height: var(--field-height, 36px); }
+  .form-button.form-button { min-height: var(--button-height, 32px); padding-block: 6px; }
+  .form-button.form-button[data-size="field"] { min-height: var(--field-height, 36px); padding-block: 8px; }
+  .form-input.form-textarea { min-height: 96px; }
+}
+
+.form-button { position: relative; }
+.form-button[data-loading] .button-label { opacity: 0; }
+.button-spinner { position: absolute; left: calc(50% - 7px); top: calc(50% - 7px); animation: button-spin 1s linear infinite; }
+@keyframes button-spin { to { transform: rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .button-spinner { animation: none; } }
+
+
+/* Normalize native search/select heights, including WebKit’s intrinsic search size. */
+.form-input.form-input:not(textarea) { height:var(--control-height,44px); }
+@media (min-width:640px) and (pointer:fine) { .form-input.form-input:not(textarea) { height:var(--field-height,36px); } }
+
+/* The transparent border belongs to the touch target, not the painted button. */
+@media (max-width:639px), (pointer:coarse) {
+  .form-button.form-button {
+    min-width:var(--control-height,44px);
+    border-block:calc((var(--control-height,44px) - var(--button-height,32px)) / 2) solid transparent;
+    padding-block:6px;
+    background-clip:padding-box;
+  }
+  .form-button.form-button[data-size="field"] {
+    border-block-width:calc((var(--control-height,44px) - var(--field-height,36px)) / 2);
+    padding-block:8px;
+  }
+}

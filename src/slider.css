@@ -1,0 +1,20 @@
+.reading-slider { width: 160px; max-width: 100%; min-width: 0; font: inherit; }
+.reading-slider-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); }
+.reading-slider-heading output { color: var(--ink-muted, #666); }
+.reading-slider .reading-slider-input {
+  --slider-fill: var(--ink-muted, #666);
+  --slider-rest: var(--control-rest, #ededed);
+  appearance: none; display: block; box-sizing: border-box; width: 100%; height: var(--control-height, 44px);
+  margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer;
+}
+.reading-slider-input::-webkit-slider-runnable-track { height: 2px; border: 0; border-radius: var(--radius-surface, 2px); background: linear-gradient(to right, var(--slider-fill) var(--slider-progress), var(--slider-rest) var(--slider-progress)); }
+.reading-slider-input::-moz-range-track { height: 2px; border: 0; border-radius: var(--radius-surface, 2px); background: var(--slider-rest); }
+.reading-slider-input::-moz-range-progress { height: 2px; border-radius: var(--radius-surface, 2px); background: var(--slider-fill); }
+.reading-slider-input::-webkit-slider-thumb { appearance: none; box-sizing: border-box; width: 14px; height: 14px; margin-top: -6px; border: 2px solid var(--surface-base, #fff); border-radius: 50%; background: var(--slider-fill); }
+.reading-slider-input::-moz-range-thumb { box-sizing: border-box; width: 14px; height: 14px; border: 2px solid var(--surface-base, #fff); border-radius: 50%; background: var(--slider-fill); }
+.reading-slider .reading-slider-input:focus-visible { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px; }
+.reading-slider:has(:disabled) { color: var(--field-disabled-ink, #8a8a8a); }
+.reading-slider .reading-slider-input:disabled { --slider-fill: var(--field-disabled-ink, #8a8a8a); --slider-rest: var(--field-disabled-surface, #f2f2f2); cursor: not-allowed; }
+@media (hover: hover) and (pointer: fine) {
+  .reading-slider .reading-slider-input:enabled:hover { --slider-fill: var(--ink, #000); }
+}

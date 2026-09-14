@@ -1,0 +1,38 @@
+.feedback-alert, .feedback-empty, .feedback-spinner, .feedback-progress, .feedback-toast {
+  font-family: inherit; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); font-weight: 400; color: var(--ink, #000);
+}
+.feedback-alert, .feedback-toast { --feedback-tone: var(--field-focus, #e8531c); border: 0; border-radius: var(--radius-surface, 2px); background: color-mix(in srgb, var(--feedback-tone) 6%, var(--surface-base, #fff)); }
+.feedback-alert[data-tone="success"], .feedback-toast[data-tone="success"] { --feedback-tone: var(--field-success, #276738); }
+.feedback-alert[data-tone="error"], .feedback-toast[data-tone="error"] { --feedback-tone: var(--field-error, #b3261e); }
+.feedback-alert { display: flex; align-items: flex-start; gap: 8px; padding: 12px; }
+.feedback-alert > svg, .feedback-toast-content > svg { flex: 0 0 16px; margin-top: 2px; color: var(--feedback-tone); }
+.feedback-alert .feedback-title, .feedback-empty .feedback-title, .feedback-toast .feedback-title { margin: 0; font: inherit; font-weight: 400; }
+.feedback-empty .feedback-description, .feedback-toast .feedback-description { margin: 0; font: inherit; color: var(--ink-muted, #666); }
+.feedback-empty { display: grid; gap: 8px; border: 0; border-radius: var(--radius-surface, 2px); padding: 24px; background: var(--surface-paper, #fafafa); }
+.feedback-spinner { display: inline-flex; align-items: center; gap: 8px; }
+.feedback-spinner > svg { flex: 0 0 16px; animation: feedback-spin 1000ms linear infinite; }
+.feedback-skeleton { max-width: 100%; border-radius: var(--radius-surface, 2px); background: var(--control-rest, #ededed); animation: feedback-pulse 1400ms ease-in-out infinite; }
+.feedback-progress { display: grid; gap: 8px; width: 240px; max-width: 100%; }
+.feedback-progress > div { display: flex; justify-content: space-between; gap: 8px; }
+.feedback-progress > div > span { color: var(--ink-muted, #666); }
+.feedback-progress > progress { appearance: none; display: block; width: 100%; height: 4px; border: 0; border-radius: var(--radius-surface, 2px); overflow: hidden; background: var(--control-rest, #ededed); color: var(--ink-muted, #666); }
+.feedback-progress > progress::-webkit-progress-bar { background: var(--control-rest, #ededed); border-radius: var(--radius-surface, 2px); }
+.feedback-progress > progress::-webkit-progress-value { background: var(--ink-muted, #666); border-radius: var(--radius-surface, 2px); }
+.feedback-progress > progress::-moz-progress-bar { background: var(--ink-muted, #666); border-radius: var(--radius-surface, 2px); }
+.feedback-example { display: grid; gap: 16px; }
+.feedback-example-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.feedback-toast-viewport { position: fixed; right: 16px; bottom: 16px; z-index: 100; display: flex; flex-direction: column-reverse; gap: 8px; width: 320px; max-width: calc(100vw - 32px); outline: none; }
+.feedback-toast { position: relative; display: flex; align-items: center; min-height: var(--control-height, 44px); padding: 8px 8px 8px 12px; box-shadow: 0 2px 12px rgb(0 0 0 / .08); transition: opacity var(--motion-control, 180ms) var(--ease-ui, ease); }
+.feedback-toast[data-starting-style], .feedback-toast[data-ending-style] { opacity: 0; }
+.feedback-toast[data-limited] { display: none; }
+.feedback-toast-content { display: flex; align-items: flex-start; flex: 1; min-width: 0; gap: 8px; }
+.feedback-toast-content > div { min-width: 0; overflow-wrap: anywhere; }
+.feedback-toast .feedback-toast-close { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 var(--control-height, 44px); width: var(--control-height, 44px); height: var(--control-height, 44px); padding: 0; margin: 0; border: 0; border-radius: var(--radius-surface, 2px); background: transparent; color: var(--ink-muted, #666); cursor: pointer; transition: background-color var(--motion-link, 180ms) var(--ease-ui, ease), color var(--motion-link, 180ms) var(--ease-ui, ease); }
+.feedback-toast .feedback-toast-close:focus-visible, .feedback-toast:focus-visible { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: -2px; }
+@media (hover: hover) and (pointer: fine) { .feedback-toast .feedback-toast-close:hover { background: var(--surface-hover, #f3f3f3); color: var(--ink, #000); } }
+@keyframes feedback-spin { to { transform: rotate(360deg); } }
+@keyframes feedback-pulse { 50% { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) {
+  .feedback-spinner > svg, .feedback-skeleton { animation: none; }
+  .feedback-toast, .feedback-toast .feedback-toast-close { transition: none; }
+}

@@ -1,0 +1,93 @@
+/* Shared floating surfaces; Base UI owns focus, dismissal and keyboard behavior. */
+.overlay-trigger.overlay-trigger, .overlay-close.overlay-close, .overlay-menu-item.overlay-menu-item {
+  box-sizing: border-box; border: 0; border-radius: var(--radius-surface, 2px);
+  min-height: var(--control-height, 44px); padding: 12px; margin: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: inherit; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); font-weight: 400;
+  color: var(--ink, #000); background: var(--control-rest, #ededed); cursor: pointer;
+  transition: background-color var(--motion-link, 180ms) var(--ease-ui, ease), color var(--motion-link, 180ms) var(--ease-ui, ease);
+}
+.overlay-trigger.overlay-trigger { min-height: var(--control-height-compact, 32px); padding-block: 6px; }
+.overlay-trigger:disabled, .overlay-menu-item[data-disabled] { color: var(--field-disabled-ink, #8a8a8a); cursor: default; }
+.overlay-close.overlay-close { background: transparent; min-height: 28px; width: 28px; flex: 0 0 28px; padding: 6px; }
+.overlay-trigger:focus-visible, .overlay-close:focus-visible, .overlay-menu-item:focus-visible {
+  outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: 2px;
+}
+.overlay-positioner { z-index: 100; }
+.overlay-surface {
+  box-sizing: border-box; border: 0; border-radius: var(--radius-surface, 2px);
+  background: var(--surface-base, #fff); color: var(--ink, #000);
+  box-shadow: 0 4px 24px rgb(0 0 0 / var(--shadow-center, .07)), 0 2px 8px rgb(0 0 0 / var(--shadow-edge, .04));
+  font-family: inherit; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); font-weight: 400;
+  opacity: 1; transition: opacity var(--motion-link, 180ms) var(--ease-ui, ease);
+}
+.overlay-surface[data-starting-style], .overlay-surface[data-ending-style], .overlay-backdrop[data-starting-style], .overlay-backdrop[data-ending-style] { opacity: 0; }
+.overlay-surface:focus { outline: none; }
+.overlay-menu { padding: 4px; min-width: 180px; max-width: min(320px, var(--available-width)); max-height: var(--available-height); overflow-y: auto; }
+.overlay-menu-item.overlay-menu-item { display: flex; width: 100%; justify-content: start; background: transparent; text-align: left; }
+.overlay-menu-item[data-highlighted]:not([data-disabled]) { background: var(--surface-hover, #f3f3f3); }
+.overlay-tooltip { max-width: min(240px, var(--available-width)); padding: 8px 12px; overflow-wrap: anywhere; }
+.overlay-popover { width: 288px; max-width: var(--available-width); max-height: var(--available-height); overflow: auto; padding: 0; }
+.overlay-heading { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px; border-bottom: 1px solid rgb(0 0 0 / var(--rule-opacity, .07)); font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); }
+.overlay-heading.surface-header::after { display: none; }
+.overlay-title.overlay-title { margin: 0; font: inherit; color: var(--ink, #000); }
+.overlay-description.overlay-description { margin: 0; font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); color: var(--ink-muted, #666); }
+.overlay-content { padding: 16px; display: grid; gap: 12px; }
+.overlay-body { margin: 0; display: grid; gap: 12px; }
+.overlay-body > :is(button, .form-button, .overlay-actions) { justify-self: start; max-width: 100%; }
+.overlay-body p, .overlay-body label { margin: 0; font: inherit; }
+.overlay-body p { font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); color: var(--ink-muted, #666); }
+.overlay-backdrop { position: fixed; inset: 0; z-index: 100; background: rgb(0 0 0 / .12); opacity: 1; transition: opacity var(--motion-link, 180ms) var(--ease-ui, ease); }
+.overlay-modal { position: fixed; z-index: 101; padding: 0; overflow-y: auto; overscroll-behavior: contain; }
+.overlay-dialog { top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(400px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); }
+.overlay-sheet { top: 0; bottom: 0; right: 0; width: min(360px, 100vw); border-radius: 0; }
+.overlay-example { display: grid; justify-items: start; gap: 16px; }
+.overlay-example-status { margin: 0; font-size: var(--font-size-caption, 12px); line-height: var(--line-height-caption, 20px); color: var(--ink-muted, #666); }
+.overlay-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (hover: hover) and (pointer: fine) {
+  .overlay-trigger.overlay-trigger:not(:disabled):hover, .overlay-close.overlay-close:hover { background: var(--surface-hover, #f3f3f3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .overlay-trigger.overlay-trigger, .overlay-close.overlay-close, .overlay-menu-item.overlay-menu-item, .overlay-surface, .overlay-backdrop { transition: none; }
+}
+
+@media (pointer: coarse), (max-width: 639px) {
+  .overlay-trigger.overlay-trigger { min-height: var(--control-height, 44px); padding-block: 12px; }
+  .overlay-close.overlay-close { min-height: 44px; width: 44px; flex-basis: 44px; padding: 14px; }
+}
+
+/* Modal tasks share the reading header; small popovers and menus stay compact. */
+.overlay-modal { font-size: var(--font-size-secondary,16px); line-height: var(--line-height-secondary,24px); }
+.overlay-modal .overlay-heading[data-header-layout] {
+  --surface-space: 16px; --header-background: var(--surface-base,#fff);
+  position: relative; padding: 14px 16px; border: 0;
+  font-size: var(--font-size-body,18px); line-height: var(--line-height-body,28px);
+}
+.overlay-modal .overlay-heading[data-header-layout]::before { display: block; opacity: 1; background: rgb(0 0 0 / var(--rule-opacity,.07)); }
+.overlay-modal .overlay-content, .overlay-modal .overlay-body { gap: 16px; }
+.overlay-modal .overlay-description, .overlay-modal .overlay-body p {
+  font-size: var(--font-size-secondary,16px); line-height: var(--line-height-secondary,24px);
+}
+@media (pointer: coarse), (max-width: 639px) {
+  .overlay-modal .overlay-heading[data-header-layout] { min-height: 60px; padding-block: 8px; }
+}
+
+/* Focused surfaces share one mobile action-sheet treatment. */
+@media (max-width:639px) {
+  .overlay-modal {
+    top:auto; right:0; bottom:0; left:0;
+    width:100%; max-height:calc(100dvh - env(safe-area-inset-top,0px));
+    display:flex; flex-direction:column; overflow:hidden;
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    border-radius:var(--radius-surface,2px) var(--radius-surface,2px) 0 0;
+    transform:translateY(0);
+    transition:transform var(--motion-mobile-open) var(--ease-mobile-open);
+  }
+  .overlay-modal > .overlay-heading { flex-shrink:0; }
+  .overlay-modal > .overlay-content { min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+  .overlay-modal[data-starting-style], .overlay-modal[data-ending-style] { opacity:1; transform:translateY(100%); }
+  .overlay-modal[data-ending-style] { transition-duration:var(--motion-mobile-close); transition-timing-function:var(--ease-mobile-close); }
+}
+@media (max-width:639px) and (prefers-reduced-motion:reduce) {
+  .overlay-modal { transition:none; }
+}

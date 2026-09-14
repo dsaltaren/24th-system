@@ -1,0 +1,53 @@
+.disclosure-surface {
+  position: relative;
+  min-width: 0;
+  border: 1px solid rgb(0 0 0 / var(--rule-opacity, .07));
+  border-radius: var(--radius-surface, 2px);
+  color: var(--ink, #000);
+  background: var(--surface-paper, #fafafa);
+}
+/* Joined disclosures share one rule and only round the outside corners. */
+.disclosure-group { display: grid; gap: 0; min-width: 0; }
+.disclosure-group > .disclosure-surface { margin: 0; }
+[data-disclosure-group] > .disclosure-surface + .disclosure-surface { border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+[data-disclosure-group] > .disclosure-surface:has(+ .disclosure-surface) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.disclosure-surface .disclosure-heading {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 16px;
+  list-style: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-compact, 14px);
+  font-weight: 400;
+  line-height: var(--line-height-compact, 20px);
+  color: var(--ink, #000);
+}
+.disclosure-heading::marker { content: ''; }
+.disclosure-heading::-webkit-details-marker { display: none; }
+.disclosure-title { min-width: 0; overflow-wrap: anywhere; }
+.disclosure-chevron { flex: 0 0 16px; transition: transform var(--motion-link, 180ms) var(--ease-reading, ease); }
+.disclosure-details[open] > .disclosure-heading > .disclosure-chevron { transform: rotate(90deg); }
+.disclosure-body {
+  min-width: 0;
+  padding: 16px;
+  border-top: 1px solid rgb(0 0 0 / var(--rule-opacity, .07));
+  font-family: inherit;
+  font-size: var(--font-size-secondary, 16px);
+  font-weight: 400;
+  line-height: var(--line-height-secondary, 24px);
+  overflow-wrap: anywhere;
+}
+.disclosure-heading:focus-visible { outline: var(--focus-ring-width, 2px) solid var(--field-focus, #e8531c); outline-offset: -3px; }
+@media (prefers-reduced-motion: reduce) { .disclosure-chevron { transition: none; } }
+
+/* Long-form reading keeps its body scale in both the trigger and open panel. */
+.disclosure-surface[data-density="reading"] .disclosure-heading,
+.disclosure-surface[data-density="reading"] .disclosure-body {
+  font-size: var(--font-size-body, 18px);
+  line-height: var(--line-height-body, 28px);
+}
+.disclosure-surface[data-density="reading"] .disclosure-heading { min-height: 56px; }

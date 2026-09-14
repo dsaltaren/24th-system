@@ -1,0 +1,30 @@
+/* The lowest attached header owns the fade. Pseudo-elements never alter the baseline grid. */
+.surface-header::after {
+  content: ''; position: absolute; top: 100%; inset-inline: calc(-1 * var(--surface-space));
+  height: var(--shadow-depth, 8px); pointer-events: none;
+  background: linear-gradient(to right, rgb(0 0 0 / var(--shadow-edge, .04)), rgb(0 0 0 / var(--shadow-center, .07)) 50%, rgb(0 0 0 / var(--shadow-edge, .04)));
+  filter: blur(var(--shadow-blur, 2px));
+  mask-image: linear-gradient(to bottom, #000, transparent);
+  opacity: 0; transition: opacity var(--motion-shadow, 160ms) var(--ease-symmetric, ease-in-out), height var(--motion-shadow, 160ms) var(--ease-symmetric, ease-in-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .surface-header::after { transition: none; }
+}
+
+/* Only the outside ends of the inset rule fade in; the line never moves or grows. */
+@property --rule-edge-opacity { syntax: '<number>'; inherits: false; initial-value: 0; }
+
+/* Standalone surfaces share the production paint and scroll state. */
+/* Hosts may set --surface-space; an installed consumer falls back to the shipped panel tokens. */
+.surface-header[data-header-layout] { --header-space: var(--surface-space, var(--space-panel, 24px)); box-sizing: border-box; position: sticky; top: 0; z-index: 4; padding: var(--header-inset, 14px) var(--header-space); min-height: var(--header-row, 56px); font-size: var(--font-size-body, 18px); line-height: var(--line-height-body, 28px); background: var(--header-background, var(--surface-paper, #fafafa)); }
+.surface-header[data-header-layout]::after { inset-inline: 0; }
+[data-header-surface][data-scrolled] > .surface-header::after { opacity: var(--scroll-depth, 0); }
+.surface-header[data-header-layout]::before { content: ''; position: absolute; top: 100%; inset-inline: 0; height: 1px; pointer-events: none; --rule-edge-opacity: 0; background: linear-gradient(to right, rgb(0 0 0 / calc(var(--rule-opacity, .07) * var(--rule-edge-opacity))) var(--header-space), rgb(0 0 0 / var(--rule-opacity, .07)) var(--header-space), rgb(0 0 0 / var(--rule-opacity, .07)) calc(100% - var(--header-space)), rgb(0 0 0 / calc(var(--rule-opacity, .07) * var(--rule-edge-opacity))) calc(100% - var(--header-space))); transition: --rule-edge-opacity var(--motion-link, 180ms) var(--ease-symmetric, ease-in-out); }
+[data-header-surface][data-scrolled] > .surface-header::before { --rule-edge-opacity: 1; }
+@media (max-width: 1023px) { .surface-header[data-header-layout] { --header-space: var(--surface-space, var(--space-panel-mobile, 16px)); min-height: 60px; padding-block: var(--space-panel-mobile, 16px); } .surface-header[data-header-layout]::before { opacity:1; } }
+@media (prefers-reduced-motion: reduce) { .surface-header[data-header-layout]::before { transition: none; } }
+
+/* Compact headers keep one 44px centered row, including small screens. */
+.surface-header[data-header-layout][data-header-size="compact"] { min-height:44px; padding-block:12px; display:flex; align-items:center; font-size:var(--font-size-compact,14px); line-height:var(--line-height-compact,20px); }
+
+.surface-header[data-header-layout][data-header-divider="none"]::before { display:none; }

@@ -1,0 +1,71 @@
+.media-reveal { position: relative; min-width: 0; isolation: isolate; }
+.media-reveal-content { position: relative; z-index: 0; }
+.media-reveal::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: var(--surface-secondary, #eee); opacity: 0; transform-origin: top left;
+}
+.media-reveal:is([data-phase='idle'], [data-phase='surface'], [data-phase='working']) > .media-reveal-content { opacity: 0; }
+.media-reveal:is([data-phase='idle'], [data-phase='surface'], [data-phase='working'], [data-phase='revealing'])::before { opacity: 1; }
+.media-reveal[data-phase='revealing'] > .media-reveal-content { animation: media-content-build var(--media-reveal-content, 720ms) cubic-bezier(.33, 0, .2, 1) both; }
+.media-reveal-agent {
+  position: absolute; bottom: calc(100% + 3px); right: 0; display: none; grid-template-columns: repeat(15, 3px);
+  gap: 2px; pointer-events: none; color: var(--media-frame-color, #3786ff);
+}
+.media-reveal:is([data-phase='surface'], [data-phase='working']) > .media-reveal-agent { display: grid; }
+.media-reveal-agent i { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: 0; }
+.media-reveal-frame {
+  z-index: 2;
+  position: absolute; inset: 0; border: 1px solid var(--media-frame-color, #3786ff);
+  color: var(--media-frame-color, #3786ff); opacity: 0; pointer-events: none;
+}
+.media-reveal-label { position: absolute; bottom: calc(100% + 2px); left: 0; max-width: 100%; overflow: hidden; text-overflow: ellipsis; font: 12px/16px var(--font-sans, sans-serif); white-space: nowrap; }
+.media-reveal-frame > i { position: absolute; width: 6px; height: 6px; box-sizing: border-box; border: 1px solid currentColor; background: var(--paper, #fff); }
+.media-reveal-frame > i:nth-of-type(1) { top: -3px; left: -3px; }
+.media-reveal-frame > i:nth-of-type(2) { top: -3px; right: -3px; }
+.media-reveal-frame > i:nth-of-type(3) { bottom: -3px; left: -3px; }
+.media-reveal-frame > i:nth-of-type(4) { bottom: -3px; right: -3px; }
+.media-reveal[data-frame-hover]:focus-within > .media-reveal-frame { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .media-reveal[data-frame-hover]:hover > .media-reveal-frame { opacity: 1; }
+}
+@keyframes media-content-build { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .media-reveal > .media-reveal-content { opacity: 1 !important; animation: none !important; clip-path: none !important; }
+  .media-reveal::before, .media-reveal > .media-reveal-agent { display: none !important; animation: none !important; }
+}
+
+/* Work is signalled outside the reserved image surface, independently of hover. */
+.media-reveal::after {
+  content: ''; position: absolute; inset: -1px; pointer-events: none;
+  border: 1px solid var(--media-loading-border, #999); opacity: 0;
+}
+.media-reveal:is([data-phase='idle'], [data-phase='surface'])::after { opacity: .4; }
+.media-reveal:is([data-phase='surface'], [data-phase='working'])::after {
+  border-color: var(--media-frame-color, #3786ff);
+  animation: media-border-breathe 1200ms ease-in-out infinite;
+}
+@keyframes media-border-breathe { 0%, 100% { opacity: .18; } 50% { opacity: .75; } }
+@media (prefers-reduced-motion: reduce) {
+  .media-reveal::after { display: none; animation: none; }
+}
+
+.media-reveal[data-pace='quick'] {
+  --media-reveal-surface: 80ms;
+  --media-reveal-work: 260ms;
+  --media-reveal-content: 440ms;
+}
+
+.media-reveal:is([data-phase="surface"], [data-phase="working"]) .media-reveal-label { opacity: 0; }
+
+.media-reveal[data-phase='revealing'] > .media-reveal-agent {
+  display: grid;
+  animation: media-cue-out 220ms ease-out both;
+}
+.media-reveal[data-phase='revealing']::after {
+  border-color: var(--media-frame-color, #3786ff);
+  animation: media-outline-out 220ms ease-out both;
+}
+@keyframes media-cue-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes media-outline-out { from { opacity: .4; } to { opacity: 0; } }
+
+.media-reveal[data-pace="subtle"] { --media-reveal-surface: 0ms; --media-reveal-work: 40ms; --media-reveal-content: 180ms; }

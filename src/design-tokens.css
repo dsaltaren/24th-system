@@ -1,0 +1,103 @@
+/* 24th design tokens. One value per role. Each token carries its use on the same line; the token reference,
+   the registry and the component inventory read these comments, so a token without a use fails the build.
+   Group lines start a tab in the token reference: group: id | Title | description. Section lines subdivide it.
+   Breakpoints are not custom properties: three surfaces from 1024px, overlay action sheets below 640px, studies
+   collapse at 560px, narrow phones below 360px. app/viewport.ts and scripts/check-docs.mjs hold the same list. */
+:root {
+  /* group: type | Typography | Body for reading. Secondary for documentation. Compact for controls. */
+  --font-size-title: 24px; /* Article-mode document title (h1). */
+  --line-height-title: 32px; /* Article-mode title line box. */
+  --font-size-heading: 20px; /* Article-mode section heading (h2), using the body line height. */
+  --font-size-body: 18px; /* Reading prose, deeper article headings and product headings. */
+  --line-height-body: 28px; /* Reading line box. */
+  --font-size-secondary: 16px; /* Footer lettering and compact catalog copy. */
+  --line-height-secondary: 24px; /* Compact list and catalog reading line. */
+  --font-size-compact: 14px; /* Compact list and control text. */
+  --line-height-compact: 20px; /* Compact list and control line. */
+  --font-size-caption: 12px; /* Caption lettering inside the body strut. */
+  --line-height-caption: 20px; /* Stacked-layout caption line box. */
+
+  /* group: space | Space and size | A 4px unit. Desktop reading follows a 28px cadence. Samples cap at 96px. */
+  /* section: Reading */
+  --space-unit: 4px; /* Small spacing lattice. */
+  --essay-measure: 64ch; /* Maximum line measure for essay text and reading blocks. */
+  --space-paragraph: 16px; /* Minimum paragraph gap before desktop rounding. */
+  --space-module: 32px; /* Minimum module gap before desktop rounding. */
+  --space-section: 64px; /* Minimum desktop/tablet section gap. Mobile project separation remains 48px. */
+  --caption-clearance: 4px; /* Minimum ink clearance below a caption before optical adjustment. */
+  --caption-optical-offset: 4px; /* Desktop caption lettering offset; does not change flow. */
+  /* section: Surfaces */
+  --space-panel-mobile: 16px; /* Surface inset below 1024px. */
+  --space-panel: 24px; /* Surface inset from 1024px. */
+  --header-row: 56px; /* One-line desktop/tablet header box. */
+  --column-width: clamp(272px, 25vw, 360px); /* Desktop context/exploration column width. */
+  --form-width: 420px; /* Maximum width of form examples. */
+  /* section: Controls, one height family */
+  --control-height: 44px; /* Touch target and regular row height. */
+  --field-height: 36px; /* Fine-pointer desktop field and compact row height. */
+  --control-height-compact: 32px; /* Compact desktop tab, pagination and button height. */
+  --list-row: var(--control-height); /* Regular list row, same as the touch target. */
+  --list-row-compact: var(--field-height); /* Compact desktop list row, same as a field. */
+  --button-height: var(--control-height-compact); /* Fine-pointer desktop button, same as a compact control. */
+  --list-inset: 12px; /* Inset inside a full-width navigation hit area. */
+  --media-control-blur: 32px; /* Backdrop blur behind video controls. */
+
+  /* group: color | Color | Surfaces, text and interaction states. */
+  /* section: Text and links */
+  --ink: #000; /* Body and current-location ink. */
+  --ink-muted: #666; /* Internal links and secondary text. */
+  --ink-active: #111; /* Hovered or focused toggle ink. */
+  --link-external: var(--ink); /* External link rest color. */
+  --link-external-hover: var(--link-external); /* External link hover/focus color; the same ink, never orange. */
+  /* section: Surfaces */
+  --surface-base: #fff; /* Introduction surface. */
+  --surface-paper: #fafafa; /* Reading surfaces. */
+  --surface-hover: #f3f3f3; /* Hover paint for neutral interactive surfaces. */
+  --surface-canvas: #eeeef0; /* Focus backdrop. */
+  /* section: Controls */
+  --control-rest: #ededed; /* Filled control rest background. */
+  --control-hover: #e3e3e3; /* Filled control hover background. */
+  --control-pressed: #333; /* Pressed control fill. */
+  --field-border: rgb(0 0 0 / .18); /* Resting field border. Filled controls display no resting border. */
+  --selection-surface: #a0a0a0; /* Unchecked selection indicator. */
+  --selection-surface-hover: #8c8c8c; /* Hovered unchecked selection indicator. */
+  /* section: Feedback and availability */
+  --accent: #e8531c; /* Emphasis accent and keyboard focus; never the default link color. */
+  --field-focus: var(--accent); /* Visible keyboard focus, the accent. */
+  --field-error: #b3261e; /* Error text, marks and tinted surfaces. */
+  --field-success: #276738; /* Success text and marks. */
+  --field-disabled-ink: #8a8a8a; /* Disabled control lettering. */
+  --field-disabled-surface: #f2f2f2; /* Disabled control background. */
+  /* section: Media */
+  --media-control-surface: rgb(0 0 0 / .48); /* Video play/pause control at rest. */
+  --media-control-hover: rgb(0 0 0 / .64); /* Video play/pause control on hover. */
+  --media-control-ink: #fff; /* Video control icon stroke. */
+  --media-frame-color: #3786ff; /* Artboard frame, entrance cue and keyboard focus ring for media and navigation. */
+
+  /* group: shape | Shape and rules | 2px surfaces. Square lists. Visible keyboard focus. */
+  --radius-surface: 2px; /* Shared surface and control corner radius. */
+  --focus-ring-width: 2px; /* Keyboard-focus ring width. */
+  --rule-opacity: .07; /* Black separator opacity. */
+  --rule-color: rgb(0 0 0 / .1); /* 1px dividers inside essays and studies. */
+  --underline-rest: .22; /* Inline link underline opacity on pointer hover. */
+  --underline-focus: .45; /* Inline link underline opacity on keyboard focus. */
+
+  /* group: elevation | Elevation | A soft shadow marks content passing under a header. */
+  --shadow-edge: .04; /* Black shadow opacity at horizontal edges. */
+  --shadow-center: .07; /* Black shadow opacity at center. */
+  --shadow-depth: 8px; /* Shadow footprint below the header. */
+  --shadow-blur: 2px; /* Shadow paint blur. */
+  --shadow-ramp: 16px; /* Scroll distance to full shadow opacity. */
+
+  /* group: motion | Motion | Duration controls how long a change takes; a curve controls its pace. Choose Show timing to compare a fade using that value. */
+  --motion-link: 180ms; /* Link, separator and control fade. */
+  --motion-control: var(--motion-link); /* Control color transition, the same fade as links. */
+  --motion-shadow: 160ms; /* Shadow handoff transition. */
+  --motion-diamond: 480ms; /* Decorative color crossfade. */
+  --media-reveal-surface: 240ms; /* Media entrance: surface phase before the cue appears. */
+  --media-reveal-work: 800ms; /* Media entrance: working cue duration at intro pace. */
+  --media-reveal-content: 720ms; /* Media entrance: content fade once the media has decoded. */
+  --ease-ui: ease; /* Small interface color transitions. */
+  --ease-symmetric: ease-in-out; /* Balanced scroll-shadow fade. */
+  --ease-reading: cubic-bezier(.22, 1, .36, 1); /* Reading expansion and decorative crossfade curve. */
+}

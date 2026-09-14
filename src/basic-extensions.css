@@ -1,0 +1,85 @@
+/* Four compact controls. Primitive libraries own selection and focus behavior. */
+.basic-avatar { display: inline-flex; flex: 0 0 var(--avatar-size); width: var(--avatar-size); height: var(--avatar-size); align-items: center; justify-content: center; overflow: hidden; border-radius: 50%; background: var(--control-rest,#ededed); color: var(--ink,#000); font-weight: 400; font-family: inherit; font-size: 12px; line-height: 20px; vertical-align: middle; }
+.basic-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.basic-field, .basic-extension-example { display: grid; gap: 8px; width: 100%; max-width: var(--form-width,420px); font-family: inherit; font-size: var(--font-size-compact,14px); font-weight: 400; line-height: var(--line-height-compact,20px); }
+.basic-extension-example { gap: 24px; }
+.basic-extension-example > p { margin: 0; font: inherit; }
+.basic-extension-example > output, .basic-field.basic-field .basic-hint, .basic-field.basic-field .basic-error, .basic-errors, .basic-avatar-row > span:not(.basic-avatar), .basic-command-empty { margin: 0; font-size: var(--font-size-caption,12px); line-height: var(--line-height-caption,20px); font-weight: 400; }
+.basic-hint, .basic-extension-example > output, .basic-avatar-row > span:not(.basic-avatar) { color: var(--ink-muted,#666); }
+.basic-error, .basic-errors { color: var(--field-error,#b3261e); }
+.basic-date-control, .basic-command-search { box-sizing: border-box; display: flex; align-items: center; gap: 8px; min-width: 0; background: var(--control-rest,#ededed); border-radius: var(--radius-surface,2px); }
+.basic-date-control input, .basic-command-search input { box-sizing: border-box; flex: 1; width: 0; min-width: 0; height: var(--field-height,36px); min-height: var(--field-height,36px); padding: 8px 12px; border: 0; border-radius: var(--radius-surface,2px); color: var(--ink,#000); background: transparent; font: inherit; }
+.basic-date-control { gap: 4px; padding: 4px; }
+.basic-date-control input { height: 28px; min-height: 28px; padding: 4px 8px; }
+.basic-date-control .basic-icon-button { width: 28px; height: 28px; }
+.basic-date-control:has(input:disabled) { background: var(--field-disabled-surface,#f2f2f2); color: var(--field-disabled-ink,#8a8a8a); }
+.basic-date-control input:disabled { color: var(--field-disabled-ink,#8a8a8a); }
+.basic-date-control[data-invalid] { background: color-mix(in srgb,var(--field-error,#b3261e) 8%,var(--surface-base,#fff)); }
+.basic-icon-button { box-sizing: border-box; display: inline-flex; justify-content: center; align-items: center; flex-shrink: 0; width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--radius-surface,2px); background: transparent; color: inherit; cursor: pointer; }
+.basic-icon-button:disabled { color: var(--field-disabled-ink,#8a8a8a); cursor: default; }
+.basic-date-control:has(input:focus-visible), .basic-command-search[data-keyboard-focus]:has(input:focus), .basic-icon-button:focus-visible, .basic-calendar button:focus-visible { outline: var(--focus-ring-width,2px) solid var(--field-focus,#e8531c); outline-offset: 2px; }
+.basic-date-control input:focus, .basic-command-search input:focus { outline: none; }
+.basic-command-search { padding-left: 12px; }
+.basic-command-search input { padding-left: 0; }
+.basic-command-list { max-height: min(320px,50dvh); overflow: auto; padding-block: 8px; }
+.basic-command [cmdk-group-heading] { padding: 8px 12px; font-size: 12px; line-height: 20px; color: var(--ink-muted,#666); }
+.basic-command [cmdk-item] { min-height: 32px; padding: 6px 12px; border-radius: var(--radius-surface,2px); cursor: pointer; }
+.basic-command [cmdk-item][data-selected="true"] { color: var(--ink,#000); background: var(--surface-hover,#f3f3f3); }
+.basic-command [cmdk-item][data-disabled="true"] { color: var(--field-disabled-ink,#8a8a8a); cursor: default; }
+.basic-command-empty { padding: 16px 12px; color: var(--ink-muted,#666); }
+.basic-calendar-popup { padding: 16px; max-width: var(--available-width); max-height: var(--available-height); overflow: auto; }
+.basic-calendar-title { margin: 0 0 12px; font: inherit; }
+.basic-calendar { width: 252px; max-width: 100%; }
+.basic-calendar .rdp-months { position: relative; }
+.basic-calendar .rdp-nav { position: absolute; top: 0; right: 0; display: flex; gap: 4px; }
+.basic-calendar .rdp-month_caption { display: flex; align-items: center; min-height: 36px; padding-right: 76px; margin-bottom: 8px; }
+.basic-calendar .rdp-caption_label { font-size: 14px; font-weight: 400; }
+.basic-calendar table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 0; font: inherit; }
+.basic-calendar th, .basic-calendar td { padding: 0; border: 0; text-align: center; font: inherit; }
+.basic-calendar th { color: var(--ink-muted,#666); font-size: 12px; height: 28px; }
+.basic-calendar button { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--radius-surface,2px); font: inherit; color: inherit; background: transparent; cursor: pointer; }
+.basic-calendar .rdp-selected button { background: var(--ink,#000); color: var(--surface-base,#fff); }
+.basic-calendar .rdp-today:not(.rdp-selected) button { background: var(--control-rest,#ededed); }
+.basic-calendar button:disabled { color: var(--field-disabled-ink,#8a8a8a); opacity: .5; cursor: default; }
+.basic-calendar-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.basic-dropzone { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 24px 16px; border-radius: var(--radius-surface,2px); color: var(--ink,#000); background: var(--control-rest,#ededed); }
+.basic-dropzone svg { flex-shrink: 0; }
+.basic-dropzone input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.basic-dropzone:has(input:focus-visible) { outline: var(--focus-ring-width,2px) solid var(--field-focus,#e8531c); outline-offset: 2px; }
+.basic-dropzone[data-dragging] { background: var(--control-hover,#e3e3e3); }
+.basic-dropzone[data-disabled] { color: var(--field-disabled-ink,#8a8a8a); background: var(--field-disabled-surface,#f2f2f2); }
+.basic-dropzone[data-disabled] input { cursor: default; }
+.basic-file-list, .basic-errors { list-style: none; padding: 0; margin: 0; }
+.basic-file-list:empty { display: none; }
+.basic-file-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.basic-file-list li > span, .basic-errors li { overflow-wrap: anywhere; min-width: 0; }
+.basic-avatar-row { display: flex; align-items: center; gap: 12px; }
+.basic-date-control, .basic-icon-button, .basic-command [cmdk-item], .basic-calendar button, .basic-dropzone { transition: background-color var(--motion-link,180ms) var(--ease-ui,ease), color var(--motion-link,180ms) var(--ease-ui,ease); }
+@media (hover: hover) and (pointer: fine) {
+  .basic-date-control:has(input:enabled):hover { background: var(--control-hover,#e3e3e3); }
+  .basic-icon-button:enabled:hover, .basic-calendar button:enabled:hover { background: var(--surface-hover,#f3f3f3); color: var(--ink,#000); }
+  .basic-dropzone:not([data-disabled]):hover { background: var(--control-hover,#e3e3e3); }
+}
+@media (pointer: coarse), (max-width: 639px) {
+  .basic-date-control input, .basic-command-search input { height: 44px; min-height: 44px; }
+  .basic-icon-button, .basic-calendar button, .basic-date-control .basic-icon-button { width: 44px; height: 44px; }
+  .basic-command [cmdk-item] { min-height: 44px; padding-block: 12px; }
+  .basic-calendar { width: 308px; }
+  .basic-calendar .rdp-month_caption { min-height: 44px; padding-right: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .basic-date-control, .basic-icon-button, .basic-command [cmdk-item], .basic-calendar button, .basic-dropzone { transition: none; }
+}
+
+.basic-field.basic-field .basic-hint, .basic-field.basic-field .basic-error, .basic-errors { font-size:var(--font-size-caption,12px); line-height:var(--line-height-caption,20px); }
+
+/* Keep the live region mounted without reserving a second empty-selection row. */
+.basic-selection-status:empty, .basic-file-list:empty { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Searchable modal actions use the secondary reading role. */
+.basic-command { display: grid; gap: 16px; font-size: var(--font-size-secondary,16px); line-height: var(--line-height-secondary,24px); }
+.basic-command-search input { height: 44px; min-height: 44px; font-size: inherit; line-height: inherit; }
+.basic-command-list { padding-block: 0; }
+.basic-command [cmdk-group] + [cmdk-group] { margin-top: 16px; }
+.basic-command [cmdk-item] { box-sizing: border-box; min-height: 40px; padding: 8px 12px; font-size: var(--font-size-secondary,16px); line-height: var(--line-height-secondary,24px); }
+@media (pointer: coarse), (max-width: 639px) { .basic-command [cmdk-item] { min-height: 44px; } }

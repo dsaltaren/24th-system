@@ -1,0 +1,26 @@
+.reading-list { font-size: var(--font-size-secondary, 16px); line-height: var(--line-height-secondary, 24px); }
+.reading-list ul { list-style: none; padding: 0; margin: 0; }
+.reading-list li { margin: 0; }
+.reading-list[data-separators=between] li + li { border-top: 1px solid rgb(0 0 0 / var(--rule-opacity, .07)); }
+.reading-list a { box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; min-height: var(--list-row, 44px); padding: 10px var(--list-inset, 12px); color: var(--ink-muted, #666); text-decoration: none; transition: color var(--motion-link, 180ms); }
+.reading-list a[aria-current=page] { color: var(--ink, #000); font-weight: 400; }
+/* Selected paint also supplies the shared hover token, so selection survives later hover styles. */
+.reading-list[data-selection=surface] a[aria-current=page] { background-color: var(--control-rest, #ededed); --surface-hover: var(--control-rest, #ededed); }
+.reading-list a:hover { color: var(--ink, #000); }
+.reading-list a:focus-visible { outline: 1px dotted currentColor; outline-offset: -3px; }
+.reading-list small { font-size: var(--font-size-caption,12px); line-height: var(--line-height-caption,20px); color: var(--ink-muted, #666); }
+@media (prefers-reduced-motion: reduce) { .reading-list a { transition: none; } }
+
+.reading-list[data-size=compact] { font-size: var(--font-size-compact, 14px); line-height: var(--line-height-compact, 20px); }
+.reading-list[data-size=compact] a { min-height: var(--list-row-compact, 36px); padding-block: 8px; }
+@media (pointer: coarse), (max-width: 639px) { .reading-list[data-size=compact] a { min-height: var(--list-row, 44px); padding-block: 12px; } }
+
+.reading-list p.reading-list-intro { font-size: var(--font-size-secondary, 16px); line-height: var(--line-height-secondary, 24px); color: var(--ink, #000); margin: 0 0 24px; }
+
+.reading-list a { border-radius: 0; }
+
+.reading-list-section + .reading-list-section { margin-top: 32px; }
+.reading-list .reading-list-heading.reading-list-heading { font-size: var(--font-size-caption,12px); line-height: var(--line-height-caption,20px); font-weight:400; color: var(--ink); margin: 0 0 8px; }
+
+.reading-list-section ul { padding-left: 0; }
+.catalog-navigation > .form-field { margin-bottom: 24px; }

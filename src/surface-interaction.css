@@ -1,0 +1,14 @@
+/* Shared neutral hit areas. State-bearing controls retain their own paint. */
+[data-interactive-surface][data-interactive-surface] {
+  border-radius: var(--radius-surface, 2px);
+  transition: background-color var(--motion-link, 180ms) var(--ease-ui, ease), color var(--motion-link, 180ms) var(--ease-ui, ease);
+}
+[data-interactive-surface][data-surface-shape="square"] { border-radius: 0; }
+@media (hover: hover) and (pointer: fine) {
+  [data-interactive-surface][data-interactive-surface]:not(:disabled):not([aria-disabled="true"]):hover {
+    background-color: var(--surface-hover, #f3f3f3);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-interactive-surface][data-interactive-surface] { transition: none; }
+}

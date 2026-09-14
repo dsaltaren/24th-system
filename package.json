@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@base-ui/react": "1.7.0",
+    "cmdk": "1.1.1",
+    "react-day-picker": "9.8.1"
+  },
+  "devDependencies": {
+    "vite": "7.1.7",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  },
+  "name": "24th-system",
+  "version": "0.1.0",
+  "description": "Reusable React components, tokens and examples from 24th.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build --target esnext",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

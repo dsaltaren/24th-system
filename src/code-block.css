@@ -1,0 +1,64 @@
+.code-block .disclosure-heading { padding-right: 96px; }
+.code-block-name { font: 400 14px/20px ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+.code-block .code-block-body { padding: 0; }
+
+.code-block .code-block-copy {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 8px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--radius-surface, 2px);
+  background: transparent;
+  color: var(--ink-muted, #666);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  cursor: pointer;
+  transition: color var(--motion-link, 180ms) var(--ease-ui, ease);
+}
+
+.code-block .code-block-copy:hover { color: var(--ink, #000); }
+.code-block :is(.code-block-copy, .code-block-source):focus-visible {
+  outline: 1px solid rgb(0 0 0 / var(--underline-focus, .45));
+  outline-offset: -3px;
+}
+
+.code-block .code-block-source {
+  box-sizing: border-box;
+  max-height: 480px;
+  overflow: auto;
+  margin: 0;
+  padding: 16px;
+  background: var(--surface-base, #fff);
+  white-space: pre;
+  tab-size: 2;
+  overscroll-behavior: contain;
+}
+
+.code-block .code-block-source,
+.code-block .code-block-source code {
+  font: 400 13px/20px ui-monospace, SFMono-Regular, Consolas, monospace;
+  overflow-wrap: normal;
+}
+
+.code-block-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .code-block .code-block-copy { transition: none; }
+}

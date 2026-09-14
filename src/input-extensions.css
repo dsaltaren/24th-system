@@ -1,0 +1,38 @@
+.icon-button.icon-button { width: var(--control-height); height: var(--control-height); padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.icon-button > span { display: flex; }
+.choicebox.choicebox { min-width: 0; border: 0; padding: 0; margin: 0; font-size: var(--font-size-compact); line-height: var(--line-height-compact); }
+.choicebox > legend { padding: 0; margin-bottom: 8px; }
+.choicebox-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 8px; }
+.choicebox-option { box-sizing: border-box; position: relative; display: flex; flex-direction: column; justify-content: center; min-height: var(--control-height); gap: 4px; padding: 12px; border-radius: var(--radius-surface); background: var(--control-rest); cursor: pointer; transition: background-color var(--motion-link); }
+.choicebox-option input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: inherit; }
+.choicebox-option small { color: var(--ink-muted); font-size: var(--font-size-caption,12px); line-height: var(--line-height-caption,20px); font-weight: 400; }
+.choicebox-option:has(:checked) { background: var(--control-hover); }
+.choicebox-mark { opacity: 0; position: absolute; right: 12px; top: 12px; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+.choicebox-option > span { padding-right: 16px; }
+.choicebox-option:has(:checked) .choicebox-mark { opacity: 1; }
+.choicebox-option:has(:focus-visible) { outline: var(--focus-ring-width) solid var(--field-focus); outline-offset: 2px; }
+.choicebox-option:has(:disabled) { color: var(--field-disabled-ink); cursor: not-allowed; background: var(--field-disabled-surface); }
+@media(hover:hover) and (pointer:fine) { .choicebox-option:has(:enabled):hover { background: var(--control-hover); } }
+@media(prefers-reduced-motion:reduce) { .choicebox-option { transition: none; } }
+
+@media (min-width: 640px) and (pointer: fine) { .icon-button.icon-button { width: var(--button-height,32px); height: var(--button-height,32px); } }
+
+/* Example results use the same caption role as field help. */
+.input-example { display: grid; justify-items: start; gap: 8px; width: 100%; max-width: var(--form-width,420px); font-size: var(--font-size-compact,14px); line-height: var(--line-height-compact,20px); }
+.input-example > .form-field { width: 100%; }
+.input-example-caption { display: block; margin: 0; color: var(--ink-muted,#666); font-size: var(--font-size-caption,12px); line-height: var(--line-height-caption,20px); }
+
+/* Field actions match the adjacent field in both axes. */
+.icon-button.icon-button[data-size="field"] { width: var(--control-height,44px); height: var(--control-height,44px); padding: 0; }
+@media (min-width: 640px) and (pointer: fine) { .icon-button.icon-button[data-size="field"] { width: var(--field-height,36px); height: var(--field-height,36px); } }
+
+@media (max-width:639px), (pointer:coarse) {
+  .icon-button.icon-button {
+    border:calc((var(--control-height,44px) - var(--button-height,32px)) / 2) solid transparent;
+    background-clip:padding-box;
+    padding:0;
+  }
+  .icon-button.icon-button[data-size="field"] {
+    border-width:calc((var(--control-height,44px) - var(--field-height,36px)) / 2);
+  }
+}
