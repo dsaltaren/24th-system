@@ -108,3 +108,21 @@
   .rhythm-carousel .carousel { -webkit-tap-highlight-color: transparent; }
 }
 @media (prefers-reduced-motion: reduce) { .rhythm-carousel .rhythm-media-slot { transition: none; } }
+
+/* Opt-in project player: the same video stays mounted when expanded. */
+.gallery-video-controls { position:absolute; inset:auto 8px 8px; z-index:2; display:flex; gap:4px; justify-content:flex-end; opacity:0; transition:opacity var(--motion-link, 180ms); }
+.gallery-loop:hover .gallery-video-controls, .gallery-loop:focus-within .gallery-video-controls, .gallery-loop:popover-open .gallery-video-controls { opacity:1; }
+.gallery-video-controls button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:8px 12px; border:0; border-radius:0; font-size:14px; line-height:20px; color:var(--media-control-ink, #fff); background:var(--media-control-surface, rgb(0 0 0 / .48)); cursor:pointer; }
+.gallery-video-controls button:hover { background:var(--media-control-hover, rgb(0 0 0 / .64)); }
+.gallery-video-controls button:focus-visible { outline:2px solid white; outline-offset:2px; }
+.gallery-loop:popover-open { position:fixed; inset:0; margin:auto; padding:0; border:0; width:min(1200px, 100vw); height:fit-content; max-height:100dvh; overflow:auto; background:black; }
+.gallery-loop:popover-open video { max-height:calc(100dvh - 60px); object-fit:contain; }
+.gallery-loop:popover-open .gallery-video-controls { position:relative; inset:auto; padding:8px; }
+.gallery-loop::backdrop { background:rgb(0 0 0 / .8); }
+@media (hover:none), (pointer:coarse) { .gallery-video-controls { opacity:1; } }
+@media (prefers-reduced-motion:reduce) { .gallery-video-controls { transition:none; } }
+.gallery-video-controls button { -webkit-backdrop-filter:blur(var(--media-control-blur, 32px)); backdrop-filter:blur(var(--media-control-blur, 32px)); }
+.gallery-video-controls svg { stroke-width:1px; }
+@media (hover:hover) and (pointer:fine) { .gallery-video-controls button { min-height:32px; padding-block:6px; } }
+.gallery-video-controls { border:0; padding:0; margin:0; min-width:0; }
+.gallery-video-status { align-self:center; padding:4px 8px; font-size:12px; line-height:20px; color:white; background:var(--media-control-surface, rgb(0 0 0 / .48)); }

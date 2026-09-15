@@ -1,6 +1,6 @@
 {
   "source": "https://dsaltaren.com/design-system/registry.json",
-  "checkedAt": "2026-09-15T02:28:13.047Z",
+  "checkedAt": "2026-09-15T05:17:18.899Z",
   "components": [
     "button",
     "icon-button",
@@ -86,7 +86,7 @@
     "overview-grid.tsx": "d86b3fc4e056447f7e422f84ab98be6980b4a71ca43fb90c83cbc50923d40ae2",
     "product-patterns.css": "b3f6e4b6f7c0d241a0427f8f19b40c790df8120114061375f17ecb7f125f78fc",
     "product-patterns.tsx": "f37f32ed9700f7c23e2689b3beed883795d0c14dd2425dd9bdfb8af12bfa3a57",
-    "reading-components.css": "277ab537782ca4098b09043de27ad150e41230fccdfc50955e0431ce4d0f1a69",
+    "reading-components.css": "69f79c9b73054fbf6e06f00c3786bf4f72d8f14c696a224b7b69d3ad337ebb1e",
     "reading-link.tsx": "70451f3dbee17c9360c54be508c09a7757d89f4196343dd959c37e3b4778c202",
     "reading-links.css": "cbed7aed9329ec0a478a8230526e1311cb6b96e9c2d9ba2396d41bf8dbb4e669",
     "reading-list.css": "ac264f10f66a3acb3d32cd4cb043aac2a28f351bfff84572154aaee87e7e6660",
