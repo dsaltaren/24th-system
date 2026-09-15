@@ -27,6 +27,19 @@ This is a standalone snapshot of 50 portable components. It does not include the
 
 Rune Icons retain their Apache-2.0 license in `src/rune-icons-LICENSE.txt`. Other installed dependencies retain their own licenses.
 
+## Stay in sync
+
+The portable source was checked against the published registry on September 14, 2026: all 50 components and 52 source files match. `upstream.json` records the checked file hashes and the deliberate fictional avatar adaptation.
+
+```sh
+npm run check:upstream
+npm run build
+```
+
+The upstream check reports source differences without overwriting local work. Review any difference against the public component bundle, preserve fictional sample data and licenses, then build before publishing. After a successful comparison, `npm run check:upstream -- --record` refreshes the provenance record.
+
+Portfolio features such as editorial selection, analytics, contact delivery and site navigation are application code. They are not dependencies of these portable components. For those behaviors, consult the [live documentation](https://dsaltaren.com/design-system/reuse).
+
 ## Questions and sharing
 
 Questions? [Write to Danny on LinkedIn](https://www.linkedin.com/in/dannysaltaren/). If the system helps you, share it on Twitter or LinkedIn and mention Danny Saltaren. It helps a lot.

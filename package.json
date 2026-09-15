@@ -20,7 +20,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build --target esnext",
-    "preview": "vite preview --host 127.0.0.1"
+    "preview": "vite preview --host 127.0.0.1",
+    "check:upstream": "node scripts/check-upstream.mjs"
   },
   "engines": {
     "node": ">=22.13.0"
